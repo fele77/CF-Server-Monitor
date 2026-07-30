@@ -253,7 +253,9 @@ export default {
 
     // /api/config 在不带 X-Turnstile-Token 且不带 X-Turnstile-Verified 时仍然 bypass（用于初始化判断是否需要验证），
     // 带 token 或 verified header 时则走完整验证流程，以便复用 verified 字段返回验证结果
+    const apiKey = env.API_KEY || '';
     const isTurnstileBypassed = (reqPath) => {
+      if (apiKey && request.headers.get('X-API-Key') === apiKey) return true;
       if (bypassTurnstilePaths.includes(reqPath)) return true;
       if (reqPath === '/api/config' && !request.headers.get('X-Turnstile-Token') && !request.headers.get('X-Turnstile-Verified')) return true;
       return false;
