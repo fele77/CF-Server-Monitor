@@ -73,7 +73,6 @@ export function buildCspHeader({ staticDomains = [], apiDomains = [] } = {}) {
     buildDirective('font-src', ["'self'", TURNSTILE_DOMAIN, FONTS_STATIC_DOMAIN, ...staticDomains]),
     buildDirective('connect-src', ["'self'", TURNSTILE_DOMAIN, INSIGHTS_DOMAIN, ...DEFAULT_CONNECT_DOMAINS, ...apiDomains]),
     buildDirective('frame-src', [TURNSTILE_DOMAIN]),
-    buildDirective('frame-ancestors', ["'none'"]),
     buildDirective('form-action', ["'self'"]),
     buildDirective('object-src', ["'none'"]),
     buildDirective('base-uri', ["'self'"])
