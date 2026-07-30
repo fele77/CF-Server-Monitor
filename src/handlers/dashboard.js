@@ -96,7 +96,8 @@ export async function handleServerAPI(request, env, sys) {
 }
 
 export async function handleServersAPI(request, env, sys) {
-  const isLoggedIn = await checkAuth(request, env, sys);
+  const isLoggedIn = await checkAuth(request, env, sys) || 
+    (env.API_SECRET && request.headers.get('X-API-Key') === env.API_SECRET);
   
   if (sys.is_public !== 'true' && !isLoggedIn) {
     return simpleAuthResponse();
